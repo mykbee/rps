@@ -6,6 +6,27 @@ module RPS
         build_tables
       end
       def build_tables
+        @db.exec(%q[
+            CREATE TABLE IF NOT EXISTS players
+            id serial NOT NULL PRIMARY KEY,
+            username varchar(30),
+            password varchar(30)
+            ])
+
+        @db.exec(%q[
+            CREATE TABLE IF NOT EXISTS games
+            id serial NOT NULL PRIMARY KEY,
+            p1_wins integer,
+            p2_wins integer
+            ])
+
+        @db.exec(%q[
+            CREATE TABLE IF NOT EXISTS matches
+            id serial NOT NULL PRIMARY KEY,
+            player_id integer REFERENCES players(id),
+            p1_move string,
+            p2_move string
+            ])
       end
     end
   end
