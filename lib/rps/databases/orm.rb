@@ -1,3 +1,5 @@
+require 'pg'
+
 module RPS
   module Databases
     class ORM
@@ -27,6 +29,13 @@ module RPS
             p1_move string,
             p2_move string
             ])
+      end
+
+      def self.create_player username, password
+        response = @db.exec_params(%Q[
+          INSERT INTO players(username, password) VALUES($1, $2)
+          RETURNING response;], [username, password])
+          RPS::Player.new(username, password)
       end
     end
   end
