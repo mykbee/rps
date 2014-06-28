@@ -6,6 +6,6 @@ module GameEngine
   }
 
   def play(p1, p2)
-    RULES[p1][p2]
+    @winner = RULES[p1][p2]
   end
 end

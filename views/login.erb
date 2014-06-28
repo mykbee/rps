@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
 
-    <title>Log-in - CodePen</title>
+    <title>RPS</title>
 
     <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
 
@@ -14,26 +14,25 @@
   <body>
 
     <div class="login-card">
-      <h1>Log-in</h1><br>
-    <form>
+      <h1>RPS</h1><br>
+    <form method='post' action='/login'>
       <input type="text" name="user" placeholder="Username">
       <input type="password" name="pass" placeholder="Password">
       <input type="submit" name="login" class="login login-submit" value="login">
     </form>
     </div>
-    <%=params%>
-
+    <h2><%=  @result %> <%= @pword %></h2>
 
   <div class="login-card">
-      <h1>Signup</h1><br>
-    <form>
+      <h1>Sign-up</h1><br>
+    <form method='post' action='/login'>
       <input type="text" name="reguser" placeholder="Choose username">
       <input type="password" name="regpass" placeholder="Choose password">
       <input type="password" name="regpass2" placeholder="Confirm password">
-      <input type="submit" name="register" class="login login-submit" value="signup">
+      <input type="submit" name="register" class="login login-submit" value="sign-up">
     </form>
   </div>
-<%=params%>
+<!-- <%=params%> -->
 
   <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
 
