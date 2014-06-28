@@ -7,6 +7,7 @@ module RPS
         @db = PG.connect(host: 'localhost', dbname: 'rps')
         build_tables
       end
+
       def build_tables
         @db.exec(%q[
             CREATE TABLE IF NOT EXISTS players(
@@ -39,7 +40,7 @@ module RPS
 
       def get_player username
         response = @db.exec_params(%Q[
-          SELECT * FROM players WHERE username = #{username};])
+          SELECT * FROM players WHERE username = '#{username}';])
       end
     # end
   end

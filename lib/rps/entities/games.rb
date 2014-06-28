@@ -1,4 +1,4 @@
-class Game
+class RPS::Game
   def initialize username, wincount=nil
     @username = username
     @wincount = wincount

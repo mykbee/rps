@@ -1,4 +1,4 @@
-module GameEngine
+class RPS::GameEngine
   RULES = {
     "rock"     => {"rock" => "draw", "paper" => "paper", "scissors" => "rock"},
     "paper"    => {"rock" => "paper", "paper" => "draw", "scissors" => "scissors"},

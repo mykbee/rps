@@ -1,4 +1,4 @@
-class Matches
+class RPS::Matches
   def iniitialize
   end
 
