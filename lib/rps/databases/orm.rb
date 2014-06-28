@@ -40,7 +40,8 @@ module RPS
 
       def get_player username
         response = @db.exec_params(%Q[
-          SELECT * FROM players WHERE username = '#{username}';])
+          SELECT password FROM players WHERE username = $1;], [username])
+        response.first['password']
       end
     # end
   end

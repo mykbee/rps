@@ -1,0 +1,24 @@
+
+[1mFrom:[0m /home/vagrant/code/mks/backend/rps/rps/lib/rps/scripts/sign_in.rb @ line 5 RPS::SignInValidate.run:
+
+     3: [32mdef[0m [1;36mself[0m.[1;34mrun[0m(params)
+     4:   user = [1;34;4mRPS[0m.db.get_player(params[[33m:username[0m])
+ =>  5:   binding.pry
+     6: 
+     7: 
+     8:   puts [31m[1;31m"[0m[31ma[1;31m"[0m[31m[0m
+     9:   [32mif[0m user.nil?
+    10:    [1;34m# return {:success? => false, :error => :user_does_not_exist}[0m
+    11:    puts [31m[1;31m"[0m[31mb[1;31m"[0m[31m[0m
+    12:   [32mend[0m
+    13: 
+    14:   [1;34m# response = RPS.db.check_password(params[:password])[0m
+    15: 
+    16: 
+    17:   [1;34m# if response[0m
+    18:   [1;34m#   {:success? => true, :error => nil}[0m
+    19:   [1;34m#   # run the set session transaction[0m
+    20:   [1;34m# end[0m
+    21: 
+    22: [32mend[0m
+
