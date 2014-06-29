@@ -26,23 +26,35 @@ module RPS
         @db.exec(%q[
             CREATE TABLE IF NOT EXISTS matches(
             id serial NOT NULL PRIMARY KEY,
+            game_id integer REFERENCES games(id),
             p1_id integer REFERENCES players(id),
-            p2_id integer REFERENCES players(id)
+            p2_id integer REFERENCES players(id),
+            p1_move text,
+            p2_move text,
+            winner integer
             )])
       end
 
       def create_player username, password
         response = @db.exec_params(%Q[
           INSERT INTO players (username, password) VALUES ($1, $2)
+          RETURNING id;
           ], [username, password])
-          RPS::Player.new(username, password)
+          id = response.first["id"]
+          RPS::Player.new(id, username, password)
       end
 
       def get_player username
         response = @db.exec_params(%Q[
           SELECT password FROM players WHERE username = $1;], [username])
-        response.first['password']
+        password = response.first['password']
+        create_player(username, password)
       end
+
+      # def delete_player username
+      #   # DELETE projects WHERE username = #{id};
+
+      # end
     # end
   end
 end

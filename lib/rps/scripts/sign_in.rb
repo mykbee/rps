@@ -1,14 +1,13 @@
 
 class RPS::SignInValidate
   def self.run(params)
-    RPS.db.get_player(params[:username].to_s)
+    user = RPS.db.get_player(params[:username])
 
-    # if @user.nil?
-    #  not_success = {:success? => false, :error => :user_does_not_exist}
-    #  puts not_success
-
-    # else
-    #  puts "kitty"
+    if user.nil?
+       {:success? => false, :error => :user_does_not_exist}
+    else
+     puts "kitty"
+   end
   end
     # response = RPS.db.check_password(params[:password])
 

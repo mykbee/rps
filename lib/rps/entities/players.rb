@@ -1,5 +1,5 @@
 class RPS::Player
-  def initialize username, password
+  def initialize id = nil, username, password
     # make id part of the player object
     @id = id
     @username = username
