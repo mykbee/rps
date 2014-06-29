@@ -55,7 +55,20 @@ module RPS
       #   # DELETE projects WHERE username = #{id};
 
       # end
-    # end
+
+      def create_game p1_id
+        response = @db.exec_params(%Q[
+          INSERT INTO matches (p1_id) VALUES ($2)
+          ])
+      end
+
+# orm takes info from game_engine and populates the db
+# create a matches obj
+
   end
 end
+
+
+
+
 
