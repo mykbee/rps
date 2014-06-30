@@ -31,7 +31,9 @@ module RPS
             p2_id integer REFERENCES players(id),
             p1_move text,
             p2_move text,
-            winner integer
+            winner integer,
+            active text,
+            turn integer
             )])
       end
 
@@ -48,7 +50,7 @@ module RPS
         response = @db.exec_params(%Q[
           SELECT password FROM players WHERE username = $1;], [username])
         password = response.first['password']
-        create_player(username, password)
+        # create_player(username, password) #####################
       end
 
       # def delete_player username
@@ -62,6 +64,12 @@ module RPS
           ])
       end
 
+      def get_matches(active)
+        response = @db.exec_params(%Q[
+          SELECT * FROM matches WHERE active = null;], [active])
+        id = response.first['p1_id']
+        binding.pry
+      end
 # orm takes info from game_engine and populates the db
 # create a matches obj
 
