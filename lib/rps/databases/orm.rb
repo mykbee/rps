@@ -48,7 +48,10 @@ module RPS
 
       def get_player username
         response = @db.exec_params(%Q[
-          SELECT password FROM players WHERE username = $1;], [username])
+          SELECT * FROM players WHERE username = $1;], [username])
+        if response.first.nil?
+          return nil
+        end
         password = response.first['password']
         # create_player(username, password) #####################
       end
@@ -64,10 +67,12 @@ module RPS
           ])
       end
 
-      def get_matches(active)
+      def get_matches active, turn
         response = @db.exec_params(%Q[
-          SELECT * FROM matches WHERE active = null;], [active])
-        id = response.first['p1_id']
+          SELECT * FROM matches WHERE active = $1 AND turn = $2;], [active, turn])
+        active = response.first['active']
+        player_id = response.first['turn']
+
         binding.pry
       end
 # orm takes info from game_engine and populates the db
