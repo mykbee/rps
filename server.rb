@@ -12,22 +12,17 @@ get '/' do
 end
 
 get '/game' do
-  # "Hey, this is a web app"
+
   erb :game
 end
 
-# get '/login' do
-#   erb :login
-# end
+post '/game' do
+  @result = RPS::GamePlay.run(params)
+  erb :game
+end
 
 post '/login' do
-   @result = RPS::SignInValidate.run(params)
-   if result[:success?]
-
-
-  # @name = params[:user]
-  # @pword = params[:pass]
-  # binding.pry
+  @result = RPS::SignInValidate.run(params)
   erb :login
 end
 

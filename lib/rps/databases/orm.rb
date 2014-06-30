@@ -32,8 +32,7 @@ module RPS
             p1_move text,
             p2_move text,
             winner integer,
-            active text,
-            turn integer
+            active boolean
             )])
       end
 
@@ -65,16 +64,21 @@ module RPS
       def create_game p1_id
         response = @db.exec_params(%Q[
           INSERT INTO matches (p1_id) VALUES ($2)
-          ])
+          ]) # b gets inserted
       end
 
-      def get_matches active, turn
-        response = @db.exec_params(%Q[
-          SELECT * FROM matches WHERE active = $1 AND turn = $2;], [active, turn])
+      def get_matches move
+        response = @db.exec(%Q[
+          SELECT * FROM matches WHERE (p1_move = '#{move}' OR p2_move = '#{move}') AND active = TRUE;])
+        id = response.first['id']
+        game_id = response.first['game_id']
+        p1_id = response.first['p1_id']
+        p2_id = response.first['p2_id']
+        p1_move = response.first['p1_move']
+        p2_move = response.first['p2_move']
+        winner = response.first['winner']
         active = response.first['active']
-        player_id = response.first['turn']
-
-
+        RPS::Matches.new(id, game_id, p1_id, p2_id, p1_move, p2_move, winner, active)
       end
 # orm takes info from game_engine and populates the db
 # create a matches obj

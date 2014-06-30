@@ -6,12 +6,17 @@ module RPS
   # if success=true, get user input and hand it to game engine
   # argument will be params hash
 
-    def self.run(p1_move, p2_move)
-      # check_for_active = RPS.db.get_matches('true', 74)
-      #   if check_for_active
-      #     return {:success? => true, :error => nil}
-        self.play(p1_move, p2_move)
+  def self.run(params)
+    valid_match = RPS.db.get_matches(params[:move])
+
+    if !valid_match.p1_move.nil? && !valid_match.p2_move.nil? && winner.nil?
+      puts "a"
+
+      self.play(p1_move, p2move)
+    else
+      return {:success? => false, :error => :waiting}
     end
+  end
 
     def self.play(p1_move, p2_move)
       moves = ["rock", "paper", "scissors"]
