@@ -2,22 +2,31 @@
 module RPS
   class SignInValidate
     def self.run(params)
-      user = RPS.db.get_player(params[:username])
+      player = RPS.db.get_player(params[:user])
 
-      if user.nil?
-        return {:success? => false, :error => :user_does_not_exist}
-      else
-        puts "kitty"
+      if player.nil?
+        return {:success? => false, :error => :player_does_not_exist}
       end
 
-      response = RPS.db.check_password(params[:password])
+      correct_password = player.has_password?(params[:pass])
 
-
-      if response
-        {:success? => true, :error => nil}
-        # run the set session transaction
+      if !correct_password
+        return {:success? => false, :error => :invalid_password}
       end
+
+      session_id = RPS.db.create_session(:player_id => player.id)
+
+      {
+        :success? => true,
+        :session_id => session_id 
+      }
+
     end
   end
 end
+
+
+
+
+
 

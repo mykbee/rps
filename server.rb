@@ -21,7 +21,8 @@ get '/login' do
 end
 
 post '/login' do
-   @result = RPS::SignInValidate.run(params)
+  # binding.pry
+  result = RPS::SignInValidate.run(params)
 
   # @name = params[:user]
   # @pword = params[:pass]
@@ -29,9 +30,8 @@ post '/login' do
   erb :login
 end
 
-
 get '/login' do
-  hash = RPS::Sesh.run
+  # hash = RPS::Sesh.run
   sessions[:sesh_id] = hash[:session_id]
 end
 

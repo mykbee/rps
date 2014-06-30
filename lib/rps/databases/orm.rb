@@ -49,12 +49,26 @@ module RPS
       def get_player username
         response = @db.exec_params(%Q[
           SELECT * FROM players WHERE username = $1;], [username])
+        # binding.pry
         if response.first.nil?
           return nil
         end
-        password = response.first['password']
-        # create_player(username, password) #####################
+        id = response.first["id"]
+        username = response.first["username"]
+        password = response.first["password"]
+        RPS::Player.new(id, username, password)
       end
+
+      # def has_password?(username)
+      #   response = @db.exec_params(%Q[
+      #     SELECT password FROM players WHERE username = $1
+      #     RETURNING password;
+      #     ], [username])
+      #   if response.first.nil?
+      #     return nil
+      #   end
+      #   password = response.first["password"]
+      # end
 
       # def delete_player username
       #   # DELETE projects WHERE username = #{id};

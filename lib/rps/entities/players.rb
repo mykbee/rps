@@ -5,5 +5,4 @@ class RPS::Player
     @username = username
     @password = password
   end
-
 end
