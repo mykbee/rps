@@ -3,10 +3,18 @@
 <head>
   <title>RPS</title>
    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.css">
+  <link rel="stylesheet" href="./stylesheets/css/style.css" media="screen" type="text/css" />
   </head>
 </head>
 <body>
-<span>Eff ewe Sinatra.</span>
+
+<div class="login-card">
+  <h1>Choose your move</h1><br> <!-- change input action below -->
+    <form method='post' action='/login'>
+      <input type="text" name="move" placeholder="Rock, paper or scissors">
+      <input type="submit" name="login" class="login login-submit" value="login">
+    </form>
+    </div>
 <!-- stuff goes here -->
 </body>
 </html>
