@@ -16,12 +16,14 @@ get '/game' do
   erb :game
 end
 
-get '/login' do
-  erb :login
-end
+# get '/login' do
+#   erb :login
+# end
 
 post '/login' do
    @result = RPS::SignInValidate.run(params)
+   if result[:success?]
+
 
   # @name = params[:user]
   # @pword = params[:pass]
@@ -33,6 +35,7 @@ end
 get '/login' do
   hash = RPS::Sesh.run
   sessions[:sesh_id] = hash[:session_id]
+  erb :login
 end
 
 # get '/sesh' do

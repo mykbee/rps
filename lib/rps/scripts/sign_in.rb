@@ -9,9 +9,8 @@ module RPS
       else
         puts "kitty"
       end
-
+      #where should we return the object
       response = RPS.db.check_password(params[:password])
-
 
       if response
         {:success? => true, :error => nil}

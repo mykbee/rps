@@ -1,9 +1,18 @@
+require 'digest/sha1'
+
 class RPS::Player
   def initialize id = nil, username, password
     # make id part of the player object
     @id = id
     @username = username
-    @password = password
+    @password_digest = password_digest
   end
 
+  def update_password password
+    @password_digest = Digest::SHA1.hexdigest(password)
+  end
+
+  def has_password? password
+     Digest::SHA1.hexdigest(password) == @password_digest
+  end
 end

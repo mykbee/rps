@@ -52,7 +52,8 @@ module RPS
         if response.first.nil?
           return nil
         end
-        password = response.first['password']
+         RPS::Player.new(id, username, password)
+        # password = response.first['password']
         # create_player(username, password) #####################
       end
 
@@ -73,10 +74,15 @@ module RPS
         active = response.first['active']
         player_id = response.first['turn']
 
-        binding.pry
+
       end
 # orm takes info from game_engine and populates the db
 # create a matches obj
+
+      def record_winner player_id, mid
+        puts player_id
+        @db.exec("UPDATE matches SET winner = '#{player_id}' WHERE id = #{mid};")
+      end
 
   end
 end
