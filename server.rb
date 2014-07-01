@@ -12,7 +12,6 @@ get '/' do
 end
 
 get '/game' do
-  # "Hey, this is a web app"
   erb :game
 end
 
@@ -21,15 +20,12 @@ get '/login' do
 end
 
 post '/login' do
-  
   result = RPS::SignInValidate.run(params)
-  # binding.pry
+
   if result[:success?] == false
     @wrong_pw_msg = "Incorrect password, try again."
   end
-  # @name = params[:user]
-  # @pword = params[:pass]
-  # binding.pry
+
   erb :login
 end
 
