@@ -8,7 +8,7 @@ module RPS
         return {:success? => false, :error => :player_does_not_exist}
       end
 
-      correct_password = player.has_password?(params[:pass])
+      correct_password = player.has_password?(params[:user])
 
       if !correct_password
         return {:success? => false, :error => :invalid_password}
