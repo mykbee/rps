@@ -8,9 +8,10 @@ module RPS
         return {:success? => false, :error => :player_does_not_exist}
       end
 
-      correct_password = player.has_password?(params[:user])
-
-      if !correct_password
+      correct_password = player.check_password?(params)
+      
+      if correct_password == false
+        @wrong_pw_msg = "Incorrect password, try again."
         return {:success? => false, :error => :invalid_password}
       end
 

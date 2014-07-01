@@ -6,15 +6,16 @@ class RPS::Player
     @password = password
   end
 
-  def has_password?(username)
-    result = RPS.db.get_player(username)
-    if result.first['password'] != params['pass']
-      return "Incorrect password, try again."
+  def check_password?(params)
+    hash = { :user => params[:user], :pass => params[:pass] }
+    user = hash[:user] 
+    pass = hash[:pass]
+    db_pw = RPS.db.get_player(user)
+    if pass != @password
+      return false
     else
-      true
+      return true
     end
   end
-
-
 
 end
