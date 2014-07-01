@@ -7,15 +7,33 @@ module RPS
   # argument will be params hash
 
   def self.run(params)
-    valid_match = RPS.db.get_matches(params[:move])
 
-    if !valid_match.p1_move.nil? && !valid_match.p2_move.nil? && winner.nil?
-      puts "a"
+    # valid_match = RPS.db.get_matches(params[:move])
 
-      self.play(p1_move, p2move)
-    else
-      return {:success? => false, :error => :waiting}
-    end
+    # grab player_id
+    player_id = params[:player_id]
+    # grab player_move
+    player_move = params[:move]
+
+    #get_matches by player_id//if p1_id is blank insert move and return match_id
+    # match = RPS.db.get_matches(player_id)
+
+
+    # insert player_move in db
+    match =  RPS.db.get_matches(player_id)
+    match_id = match.id
+
+    # if valid_match.p2_move.nil?
+    #   @waiting_msg = "Waiting on Player 2!"
+    #   return {:success? => false, :error => :waiting_on_p2}
+    # end
+    # if !valid_match.p1_move.nil? && !valid_match.p2_move.nil? && winner.nil?
+    #   puts "a"
+
+    #   self.play(p1_move, p2move)
+    # else
+    #   return {:success? => false, :error => :waiting}
+    # end
   end
 
     def self.play(p1_move, p2_move)

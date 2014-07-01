@@ -12,12 +12,13 @@ get '/' do
 end
 
 get '/game' do
-
+  user = RPS.db.get_player(session[:player_id])
   erb :game
 end
 
 post '/game' do
-  @result = RPS::GamePlay.run(params)
+  params.merge!(player_id: session[:player_id])
+  result = RPS::GamePlay.run(params)
   erb :game
 end
 
@@ -26,14 +27,17 @@ post '/login' do
 
   if result[:success?] == false
     @wrong_pw_msg = "Incorrect password, try again."
+  else
+    session[:player_id] = result[:player_id]
   end
+  redirect to '/game'
 
   erb :login
 end
 
 get '/login' do
   # hash = RPS::Sesh.run
-  sessions[:sesh_id] = hash[:session_id]
+  # sessions[:sesh_id] = hash[:session_id]
   erb :login
 end
 

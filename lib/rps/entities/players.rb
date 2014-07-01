@@ -1,11 +1,13 @@
 require 'digest/sha1'
 
 class RPS::Player
+  attr_reader :password
+  attr_accessor :username, :id
   def initialize username, password, id=nil
     # make id part of the player object
     @id = id
     @username = username
-    @password_digest = password_digest
+    @password = password
   end
 
   def check_password?(params)

@@ -63,35 +63,23 @@ module RPS
 
       # end
 
-      # def has_password? (params)
-      #   hash = { :user => params[:user], :pass => params[:pass] }
-      #   user = RPS::ORM.get_player(hash.first) ###########
-      #   if user.fetch(:pass) != nil
-      #     return true
-      #   else
-      #     return false
-      #   end
-      # end
-
-      # def has_password? username
-      #   response = @db.exec_params(%Q[
-      #     SELECT password FROM players WHERE username = $1;], [username])
-      #   if response.first.nil?
-      #     return nil
-      #   end
-      #   id  d = response.first["password"]
-      #   # RPS::Player.new(username, password, id)
-      # end
-
       def create_game p1_id
         response = @db.exec_params(%Q[
           INSERT INTO matches (p1_id) VALUES ($2)
           ]) # b gets inserted
       end
 
+      def update_matches player_id, player_move
+
+        # response = @db.exec(%Q[
+        #   UPDATE matches WHERE NULL
+        #   ])
+      end
+
+
       def get_matches move
         response = @db.exec(%Q[
-          SELECT * FROM matches WHERE (p1_move = '#{move}' OR p2_move = '#{move}') AND active = TRUE;])
+          SELECT * FROM matches WHERE (p1_id = '#{player_id}') AND active = TRUE;])
         id = response.first['id']
         game_id = response.first['game_id']
         p1_id = response.first['p1_id']

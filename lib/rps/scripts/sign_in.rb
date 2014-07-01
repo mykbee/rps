@@ -13,19 +13,13 @@ module RPS
         return {:success? => false, :error => :invalid_password}
       end
 
-      session_id = RPS.db.create_session(:player_id => player.id)
 
       {
         :success? => true,
-        :session_id => session_id
+        :player_id => player.id
       }
 
     end
   end
 end
-
-
-
-
-
 
