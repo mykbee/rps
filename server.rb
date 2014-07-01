@@ -12,11 +12,16 @@ get '/' do
 end
 
 get '/game' do
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1208e4256c2f7327cc2046b302678895d85efa1b
   erb :game
 end
 
-get '/login' do
-  erb :login
+post '/game' do
+  @result = RPS::GamePlay.run(params)
+  erb :game
 end
 
 post '/login' do
@@ -32,6 +37,7 @@ end
 get '/login' do
   # hash = RPS::Sesh.run
   sessions[:sesh_id] = hash[:session_id]
+  erb :login
 end
 
 # get '/sesh' do
