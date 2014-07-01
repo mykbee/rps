@@ -12,10 +12,7 @@ get '/' do
 end
 
 get '/game' do
-<<<<<<< HEAD
-=======
 
->>>>>>> 1208e4256c2f7327cc2046b302678895d85efa1b
   erb :game
 end
 

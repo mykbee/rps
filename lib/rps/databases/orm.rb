@@ -52,20 +52,10 @@ module RPS
         if response.first.nil?
           return nil
         end
-<<<<<<< HEAD
-         RPS::Player.new(id, username, password)
-        # password = response.first['password']
-        # create_player(username, password) #####################
-=======
         id = response.first["id"]
         username = response.first["username"]
         password = response.first["password"]
-<<<<<<< HEAD
         RPS::Player.new(username, password, id)
-=======
-        RPS::Player.new(id, username, password)
->>>>>>> 22c49ad657e7f29e0912f195855d98edd66da51c
->>>>>>> 1208e4256c2f7327cc2046b302678895d85efa1b
       end
 
       # def delete_player username
